@@ -3,7 +3,7 @@
  * @version 1.4.4
  *
  * A multi level dependent dropdown JQuery plugin. The plugin allows nested and combined dependencies.
- * 
+ *
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
  */
@@ -35,10 +35,14 @@
 
     createOption = function ($el, id, name, sel, opts) {
         var settings = {value: id, text: name};
+				var selected = [];
         opts = opts || {};
         settings = $.extend(settings, opts);
-        if (sel !== null && sel.length && id.toString() === sel) {
-            settings.selected = "selected";
+        if (sel !== null && sel.length) {
+            selected = sel.split(",");
+            if (selected.indexOf(id.toString()) >= 0) {
+                settings.selected = "selected";
+            }
         }
         $("<option/>", settings).appendTo($el);
     };
